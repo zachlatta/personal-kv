@@ -42,6 +42,10 @@ func setVal(key, val string) error {
 
 func getVal(key string) (val string, err error) {
 	err = db.QueryRow(`SELECT val FROM data WHERE key = $1`, key).Scan(&val)
+	if err != nil && err == sql.ErrNoRows {
+		err = nil // no error if no rows found, just val = nil
+	}
+
 	return val, err
 }
 
