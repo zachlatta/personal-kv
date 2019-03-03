@@ -59,6 +59,7 @@ type resp struct {
 func handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		fmt.Fprintln(w, "use POST / to get or set keys from the database")
+		return
 	}
 
 	var req req
